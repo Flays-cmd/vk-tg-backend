@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const app = express();
 
-const ALLOWED_ORIGIN = 'https://ваш-логин.github.io';
+const ALLOWED_ORIGIN = 'https://flays-cmd.github.io';
 
 app.use(cors({
     origin: function (origin, callback) {
