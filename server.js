@@ -5,8 +5,6 @@ const cors = require('cors');
 
 const app = express();
 
-// 🔒 Укажите URL вашего сайта на GitHub Pages (БЕЗ слэша на конце)
-// Например: 'https://alexander.github.io'
 const ALLOWED_ORIGIN = 'https://ваш-логин.github.io';
 
 app.use(cors({
