@@ -4,7 +4,22 @@ const cheerio = require('cheerio');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+
+// 🔒 Укажите URL вашего сайта на GitHub Pages (БЕЗ слэша на конце)
+// Например: 'https://alexander.github.io'
+const ALLOWED_ORIGIN = 'https://ваш-логин.github.io';
+
+app.use(cors({
+    origin: function (origin, callback) {
+        // Разрешаем запросы с вашего сайта на GitHub Pages и прямые запросы при отладке
+        if (!origin || origin === ALLOWED_ORIGIN) {
+            callback(null, true);
+        } else {
+            callback(new Error('CORS restriction: Access denied.'));
+        }
+    },
+    methods: ['GET']
+}));
 
 // Роут парсинга постов из публичного ТГ-канала
 app.get('/api/posts/:channel', async (req, res) => {
@@ -64,4 +79,4 @@ app.get('/api/posts/:channel', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
